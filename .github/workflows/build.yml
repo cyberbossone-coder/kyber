@@ -1,0 +1,23 @@
+name: Go Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v5
+
+    - name: Set up Go
+      uses: actions/setup-go@v6
+      with:
+        go-version-file: go.mod
+
+    - name: Build
+      run: go build ./...
+
+    - name: Build with constantTime tag
+      run: go build -tags constantTime ./...
